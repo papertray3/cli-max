@@ -18,6 +18,7 @@
 package org.apache.commons.cli;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,6 +81,9 @@ public class Option implements Cloneable, Serializable
     /** the character that is the value separator */
     private char valuesep;
 
+    /** the associated field of the target object */
+    private Field field;
+
     /**
      * Private constructor used by the nested Builder class.
      * 
@@ -96,6 +100,7 @@ public class Option implements Cloneable, Serializable
         this.required = builder.required;
         this.type = builder.type;
         this.valuesep = builder.valuesep;
+        this.field = builder.field;
     }
     
     /**
@@ -436,6 +441,8 @@ public class Option implements Cloneable, Serializable
         }
         processValue(value);
     }
+
+
 
     /**
      * Processes the value.  If this Option has a value separator
@@ -809,6 +816,9 @@ public class Option implements Cloneable, Serializable
         /** the character that is the value separator */
         private char valuesep;
 
+        /** the field of the corresponding object */
+        private Field field;
+
         /**
          * Constructs a new <code>Builder</code> with the minimum
          * required parameters for an <code>Option</code> instance.
@@ -985,6 +995,11 @@ public class Option implements Cloneable, Serializable
         public Builder hasArgs()
         {
             numberOfArgs = Option.UNLIMITED_VALUES;
+            return this;
+        }
+
+        public Builder field(Field field) {
+            this.field = field;
             return this;
         }
 

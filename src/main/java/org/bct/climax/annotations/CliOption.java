@@ -1,5 +1,7 @@
 package org.bct.climax.annotations;
 
+import org.bct.climax.OptionNaming;
+
 import java.lang.annotation.*;
 
 /**
@@ -14,4 +16,6 @@ public @interface CliOption {
     public String description() default "";
     public String name() default "";
     public String defaultValue() default "";
+    public String argumentHint() default "";
+    public OptionNaming namingHint() default OptionNaming.SHORT;
 }
